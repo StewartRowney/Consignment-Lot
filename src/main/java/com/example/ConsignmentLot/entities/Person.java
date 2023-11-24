@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,15 +20,15 @@ public class Person {
     private String name;
     private LocalDateTime dateOfBirth;
     @OneToMany(mappedBy = "owner")
-    private List<Vehicle> vehicles;
+    private List<Vehicle> vehicles = new ArrayList<>();
 
     //CONSTRUCTORS
     public Person() {
     }
-    public Person(String name, LocalDateTime dateOfBirth, List<Vehicle> vehicles) {
+    public Person(String name, LocalDateTime dateOfBirth) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.vehicles = vehicles;
+        //this.vehicles = vehicles;
     }
     //GETTERS
     public UUID getId() {
