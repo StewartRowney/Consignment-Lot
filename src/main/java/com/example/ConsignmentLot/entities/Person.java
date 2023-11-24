@@ -22,11 +22,6 @@ public class Person {
     @OneToMany(mappedBy = "owner")
     private List<Vehicle> vehicles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "owner")
-    private List<Car> cars = new ArrayList<>();
-
-    @OneToMany(mappedBy = "owner")
-    private List<Truck> trucks = new ArrayList<>();
 
     //CONSTRUCTORS
     public Person() {
@@ -34,7 +29,6 @@ public class Person {
     public Person(String name, LocalDateTime dateOfBirth) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        //this.vehicles = vehicles;
     }
     //GETTERS
     public UUID getId() {
@@ -45,12 +39,6 @@ public class Person {
     }
     public LocalDateTime getDateOfBirth() {
         return dateOfBirth;
-    }
-    public List<Car> getCars() {
-        return cars;
-    }
-    public List<Truck> getTrucks() {
-        return trucks;
     }
 
     //SETTERS

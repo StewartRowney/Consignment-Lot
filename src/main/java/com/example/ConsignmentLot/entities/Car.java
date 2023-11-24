@@ -13,9 +13,7 @@ import java.util.UUID;
 public class Car extends Vehicle{
 
     //VARIABLES
-    @Id
-    @GeneratedValue
-    private UUID id;
+
 
     //CONSTRUCTORS
     public Car() {
@@ -25,12 +23,5 @@ public class Car extends Vehicle{
     }
 
     //GETTERS
-    public UUID getId() {
-        return id;
-    }
-
-
-    //SETTERS
-
 
 }

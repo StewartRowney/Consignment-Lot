@@ -1,11 +1,15 @@
 package com.example.ConsignmentLot.services;
 
+import com.example.ConsignmentLot.comparators.VehicleComparator;
 import com.example.ConsignmentLot.data.IVehicleRepository;
 import com.example.ConsignmentLot.entities.Car;
+import com.example.ConsignmentLot.entities.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CarService implements ICarService{
 
     private final IVehicleRepository repository;
@@ -17,6 +21,8 @@ public class CarService implements ICarService{
 
     @Override
     public List<Car> getAllCars() {
-        return repository.findAllCars();
+        List<Car> cars = repository.findAllCars();
+        cars.sort(new VehicleComparator());
+        return cars;
     }
 }
