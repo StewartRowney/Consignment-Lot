@@ -10,6 +10,5 @@ import java.util.UUID;
 
 @Repository
 public interface ICarRepository extends ListCrudRepository<Car, UUID> {
-
     List<Car> findCarsByOwnerName(String name);
 }

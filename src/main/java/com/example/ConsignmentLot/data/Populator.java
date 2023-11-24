@@ -11,7 +11,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import java.awt.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -21,17 +20,15 @@ import java.time.Month;
 public class Populator {
     LocalDateTime dob = LocalDateTime.of(2001,Month.AUGUST,15,10,10);
     private final PersonRepository personRepository;
-    private final IVehicleRepository vehicleRepository;
+    private final ICarRepository carRepository;
+    private final ITruckRepository truckRepository;
+
 
     @Autowired
-    ICarRepository carRepo;
-    @Autowired
-    ITruckRepository truckRepo;
-
-    @Autowired
-    public Populator(PersonRepository personRepository, IVehicleRepository vehicleRepository) {
+    public Populator(PersonRepository personRepository, IVehicleRepository vehicleRepository, ICarRepository carRepository, ITruckRepository truckRepository) {
         this.personRepository = personRepository;
-        this.vehicleRepository = vehicleRepository;
+        this.carRepository = carRepository;
+        this.truckRepository = truckRepository;
     }
     @EventListener(ContextRefreshedEvent.class)
     public void populate(){
@@ -39,18 +36,9 @@ public class Populator {
         Person p2 = new Person("Ayu", LocalDateTime.of(1996,Month.MAY,28,9,10));
         personRepository.save(p1);
         personRepository.save(p2);
-        truckRepo.save(new Truck("truck1", "model1", 9000.00, p2));
-        truckRepo.save(new Truck("truck2", "model2", 10000.00, p2));
-        carRepo.save(new Car("car1", "model1", 99.00, p1 ));
-        carRepo.save(new Car("car2", "model2", 990.00, p1 ));
-        personRepository.save(p1);
-        personRepository.save(p2);
-
-        Vehicle v1 = new Vehicle(BigDecimal.valueOf(12000), VehicleColour.BLUE, 5, true, p1);
-        Vehicle v2 = new Vehicle(BigDecimal.valueOf(25000), VehicleColour.RED, 2, true, p1);
-        Vehicle v3 = new Vehicle(BigDecimal.valueOf(2000), VehicleColour.GREEN, 5, false, p2);
-        vehicleRepository.save(v1);
-        vehicleRepository.save(v2);
-        vehicleRepository.save(v3);
+        truckRepository.save(new Truck(BigDecimal.valueOf(12000), VehicleColour.BLUE, 5, true, p1));
+        truckRepository.save(new Truck(BigDecimal.valueOf(20000), VehicleColour.BLUE, 5, false, p1));
+        carRepository.save(new Car(BigDecimal.valueOf(25000), VehicleColour.RED, 2, true, p1));
+        carRepository.save(new Car(BigDecimal.valueOf(2000), VehicleColour.GREEN, 5, false, p2));
     }
 }

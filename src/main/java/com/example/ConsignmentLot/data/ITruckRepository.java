@@ -8,6 +8,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ITruckRepository extends ListCrudRepository<Truck, UUID> {
-
     List<Truck> findTruckByOwnerName(String name);
 }
