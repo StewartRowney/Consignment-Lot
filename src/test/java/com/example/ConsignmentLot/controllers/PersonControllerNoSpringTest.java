@@ -9,7 +9,7 @@ import static org.mockito.Mockito.*;
 
 class PersonControllerNoSpringTest {
 
-    IPersonService mockService = mock(PersonService.class);
+    IPersonService mockService = mock(IPersonService.class);
     PersonController uut = new PersonController(mockService);
 
     @Test

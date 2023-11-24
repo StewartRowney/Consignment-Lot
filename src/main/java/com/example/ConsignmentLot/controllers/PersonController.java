@@ -1,5 +1,6 @@
 package com.example.ConsignmentLot.controllers;
 
+import com.example.ConsignmentLot.entities.Car;
 import com.example.ConsignmentLot.entities.Person;
 import com.example.ConsignmentLot.entities.Truck;
 import com.example.ConsignmentLot.services.PersonService;
@@ -21,10 +22,10 @@ import java.util.List;
 public class PersonController {
 
     @Autowired
-    PersonService service;
+    IPersonService service;
 
     @Autowired
-    public PersonController(PersonService service) {
+    public PersonController(IPersonService service) {
         this.service = service;
     }
     @GetMapping("")
