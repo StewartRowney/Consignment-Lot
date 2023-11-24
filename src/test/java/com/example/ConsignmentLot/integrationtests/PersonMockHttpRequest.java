@@ -17,6 +17,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.time.LocalDateTime;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -39,6 +44,22 @@ public class PersonMockHttpRequest {
     }
 
     @Test
+    void testAddPerson() throws Exception {
+
+        int numberOfPersonsBeforeAdd = getAllPersons().length;
+
+        Person person = new Person("Jim", LocalDateTime.of(2000,10,10,14,55));
+        Person actualperson = addPerson(person);
+        int numberOfPersonsAfterAdd = getAllPersons().length;
+
+        assertAll(
+                () -> assertEquals(person.getName(), actualperson.getName()),
+                () -> assertEquals(person.getDateOfBirth(), actualperson.getDateOfBirth()),
+                () -> assertEquals(numberOfPersonsBeforeAdd + 1, numberOfPersonsAfterAdd)
+        );
+
+    }
+
     private Person addPerson(Person person) throws Exception {
         String json = mapper.writeValueAsString(person);
 
@@ -54,5 +75,16 @@ public class PersonMockHttpRequest {
 
         String contentAsJson = result.getResponse().getContentAsString();
         return mapper.readValue(contentAsJson, Person.class);
+    }
+
+    private Person[] getAllPersons() throws Exception {
+        MvcResult result =
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/persons")))
+                        .andExpect(status().isOk())
+                        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                        .andReturn();
+
+        String contentAsJson = result.getResponse().getContentAsString();
+        return mapper.readValue(contentAsJson, Person[].class);
     }
 }
