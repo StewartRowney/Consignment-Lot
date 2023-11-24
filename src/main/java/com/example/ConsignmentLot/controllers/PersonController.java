@@ -1,9 +1,11 @@
 package com.example.ConsignmentLot.controllers;
 
+import com.example.ConsignmentLot.entities.Car;
 import com.example.ConsignmentLot.entities.Person;
 import com.example.ConsignmentLot.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +25,11 @@ public class PersonController {
     @GetMapping("")
     public List<Person> getAllPersons(){
         return service.getAllPersons();
+    }
+
+    @GetMapping("/person/{personName}/cars")
+    public List<Car> getAllCarsByPersonName(@PathVariable String personName) {
+        return service.getAllCarsByName(personName);
     }
 
 }

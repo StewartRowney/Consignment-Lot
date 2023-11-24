@@ -3,6 +3,7 @@ package com.example.ConsignmentLot.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 import javax.annotation.processing.Generated;
 import java.util.UUID;
@@ -16,6 +17,8 @@ public class Truck{
     private String name;
     private String model;
     private double askingPrice;
+    @ManyToOne
+    private Person owner;
 
     //Constructors
 
@@ -24,6 +27,29 @@ public class Truck{
     public Truck(String name, String model, double askingPrice) {
         this.name = name;
         this.model = model;
+        this.askingPrice = askingPrice;
+    }
+
+    //Getters
+
+    public String getName() {
+        return name;
+    }
+    public String getModel() {
+        return model;
+    }
+    public double getAskingPrice() {
+        return askingPrice;
+    }
+
+    //Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setModel(String model) {
+        this.model = model;
+    }
+    public void setAskingPrice(double askingPrice) {
         this.askingPrice = askingPrice;
     }
 }

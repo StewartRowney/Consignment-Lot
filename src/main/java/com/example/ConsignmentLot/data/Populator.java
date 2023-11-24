@@ -1,5 +1,6 @@
 package com.example.ConsignmentLot.data;
 
+import com.example.ConsignmentLot.entities.Car;
 import com.example.ConsignmentLot.entities.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -15,6 +16,9 @@ public class Populator {
     PersonRepository personRepository;
 
     @Autowired
+    ICarRepository carRepo;
+
+    @Autowired
     public Populator(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
@@ -22,6 +26,10 @@ public class Populator {
     public void populate(){
         Person p1 = new Person("Stew",dob);
         Person p2 = new Person("Ayu", dob);
+        personRepository.save(p1);
+        personRepository.save(p2);
+        carRepo.save(new Car("car1", "model1", 99.00, p1 ));
+        carRepo.save(new Car("car2", "model2", 990.00, p1 ));
         personRepository.save(p1);
         personRepository.save(p2);
     }
