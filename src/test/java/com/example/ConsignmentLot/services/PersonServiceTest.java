@@ -1,25 +1,27 @@
 package com.example.ConsignmentLot.services;
 
-import com.example.ConsignmentLot.controllers.PersonController;
+import com.example.ConsignmentLot.data.PersonRepository;
 import com.example.ConsignmentLot.entities.Person;
 import org.junit.jupiter.api.Test;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@SpringBootTest
 class PersonServiceTest {
 
-    IPersonService mockService = mock(PersonService.class);
-    PersonController uut = new PersonController(mockService);
+    @MockBean
+    PersonRepository mockRepo;
 
-    @Test
-    void addPerson() {
+    @Autowired
+    PersonService uut;
 
-        Person person = new Person("Jim", LocalDateTime.MIN);
-        uut.addPerson(person);
-        verify(mockService, times(1)).addPerson(person);
-
+        @Test
+        void test_AddPerson_ValidRequest() {
+            Person person = new Person("Jim", LocalDateTime.MIN);
+            uut.addPerson(person);
+            verify(mockRepo, times(1)).save(person);
+        }
     }
-}
