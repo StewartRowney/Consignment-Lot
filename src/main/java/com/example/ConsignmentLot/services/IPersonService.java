@@ -5,6 +5,6 @@ import com.example.ConsignmentLot.entities.Person;
 import java.util.List;
 
 public interface IPersonService {
-    public List<Person> getAllPersons();
-
+    List<Person> getAllPersons();
+    Person addPerson(Person person);
 }
