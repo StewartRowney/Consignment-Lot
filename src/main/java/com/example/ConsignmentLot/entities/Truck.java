@@ -24,10 +24,11 @@ public class Truck{
 
     public Truck() {}
 
-    public Truck(String name, String model, double askingPrice) {
+    public Truck(String name, String model, double askingPrice, Person owner) {
         this.name = name;
         this.model = model;
         this.askingPrice = askingPrice;
+        this.owner=owner;
     }
 
     //Getters
