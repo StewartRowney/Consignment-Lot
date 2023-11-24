@@ -1,4 +1,4 @@
-package com.example.ConsignmentLot.integration;
+package com.example.ConsignmentLot.integrationtests;
 
 import com.example.ConsignmentLot.entities.Vehicle;
 import com.fasterxml.jackson.databind.ObjectMapper;

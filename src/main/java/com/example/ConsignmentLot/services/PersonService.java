@@ -42,10 +42,10 @@ public class PersonService implements IPersonService {
         return repo.save(person);
     }
 
-    public List<Car> getAllCarsByName(String name) {
-        return carRepo.findCarsByOwnerName(name);
-    }
-    public List<Truck> getAllTruckByName(String name) {
-        return truckRepo.findTruckByOwnerName(name);
-    }
+//    public List<Car> getAllCarsByName(String name) {
+//        return carRepo.findCarsByOwnerName(name);
+//    }
+//    public List<Truck> getAllTruckByName(String name) {
+//        return truckRepo.findTruckByOwnerName(name);
+//    }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public interface IPersonService {
     List<Person> getAllPersons();
     Person addPerson(Person person);
-    List<Car> getAllCarsByName(String personName);
-    List<Truck> getAllTruckByName(String personName);
+//    List<Car> getAllCarsByName(String personName);
+//    List<Truck> getAllTruckByName(String personName);
 
 }
