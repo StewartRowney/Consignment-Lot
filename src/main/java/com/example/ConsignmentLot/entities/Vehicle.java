@@ -1,5 +1,6 @@
 package com.example.ConsignmentLot.entities;
 
+import com.example.ConsignmentLot.entities.enums.VehicleColour;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -17,7 +18,7 @@ public class Vehicle {
     @GeneratedValue
     private UUID id;
     private BigDecimal price;
-    private Color colour;
+    private VehicleColour colour;
     private int numberOfSeats;
     private boolean isWorking;
     @ManyToOne
@@ -26,7 +27,7 @@ public class Vehicle {
     //CONSTRUCTORS
     public Vehicle() {
     }
-    public Vehicle(BigDecimal price, Color colour, int numberOfSeats, boolean isWorking, Person owner) {
+    public Vehicle(BigDecimal price, VehicleColour colour, int numberOfSeats, boolean isWorking, Person owner) {
         this.price = price;
         this.colour = colour;
         this.numberOfSeats = numberOfSeats;
@@ -41,7 +42,7 @@ public class Vehicle {
     public BigDecimal getPrice() {
         return price;
     }
-    public Color getColour() {
+    public VehicleColour getColour() {
         return colour;
     }
     public int getNumberOfSeats() {
@@ -58,7 +59,7 @@ public class Vehicle {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-    public void setColour(Color colour) {
+    public void setColour(VehicleColour colour) {
         this.colour = colour;
     }
     public void setNumberOfSeats(int numberOfSeats) {
