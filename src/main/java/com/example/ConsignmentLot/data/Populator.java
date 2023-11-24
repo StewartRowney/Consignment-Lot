@@ -4,6 +4,7 @@ import com.example.ConsignmentLot.entities.Person;
 import com.example.ConsignmentLot.entities.Vehicle;
 import com.example.ConsignmentLot.entities.enums.VehicleColour;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 
 @Component
+@Profile("!test")
 public class Populator {
     LocalDateTime dob = LocalDateTime.of(2001,Month.AUGUST,15,10,10);
     private final PersonRepository personRepository;
