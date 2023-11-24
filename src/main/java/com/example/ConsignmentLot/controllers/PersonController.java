@@ -40,14 +40,4 @@ public class PersonController {
         return service.addPerson(person);
     }
 
-//    @GetMapping("/person/{personName}/cars")
-//    public List<Car> getAllCarsByPersonName(@PathVariable String personName) {
-//        return service.getAllCarsByName(personName);
-//    }
-//
-//    @GetMapping("/person/{personName}/trucks")
-//    public List<Truck> getAllTrucksByPersonName(@PathVariable String personName) {
-//        return service.getAllTruckByName(personName);
-//    }
-
 }
