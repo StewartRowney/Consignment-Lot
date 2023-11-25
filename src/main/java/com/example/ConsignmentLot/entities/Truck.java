@@ -1,56 +1,24 @@
 package com.example.ConsignmentLot.entities;
 
+import com.example.ConsignmentLot.entities.enums.VehicleColour;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 
-import javax.annotation.processing.Generated;
-import java.util.UUID;
+import java.math.BigDecimal;
 
 @Entity
-public class Truck{
-    //Fields
-    @Id
-    @GeneratedValue
-    private UUID uuid;
-    private String name;
-    private String model;
-    private double askingPrice;
-    @ManyToOne
-    private Person owner;
+public class Truck extends Vehicle{
 
-    //Constructors
+    //VARIABLES
 
-    public Truck() {}
-
-    public Truck(String name, String model, double askingPrice, Person owner) {
-        this.name = name;
-        this.model = model;
-        this.askingPrice = askingPrice;
-        this.owner=owner;
+    //CONSTRUCTORS
+    public Truck() {
+    }
+    public Truck(BigDecimal price, VehicleColour colour, int numberOfSeats, boolean isWorking, Person owner) {
+        super(price, colour, numberOfSeats, isWorking, owner);
     }
 
-    //Getters
+    //GETTERS
 
-    public String getName() {
-        return name;
-    }
-    public String getModel() {
-        return model;
-    }
-    public double getAskingPrice() {
-        return askingPrice;
-    }
 
-    //Setters
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setModel(String model) {
-        this.model = model;
-    }
-    public void setAskingPrice(double askingPrice) {
-        this.askingPrice = askingPrice;
-    }
+    //SETTERS
 }

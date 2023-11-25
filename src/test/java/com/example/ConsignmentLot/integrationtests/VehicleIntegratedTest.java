@@ -26,18 +26,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @TestPropertySource(properties = {"spring.sql.init.mode=never"})
 @ActiveProfiles("test")
-class VehicleIT {
+class VehicleIntegratedTest {
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     private final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
     @Test
-    void testGettingAllVehicles() throws Exception {
-        Vehicle[] actualPersons = getAllVehicles();
+    void test_GetAllVehicles_ValidRequest() throws Exception {
+        Vehicle[] actualVehicles = getAllVehicles();
 
-        assertEquals(3, actualPersons.length);
+        assertEquals(3, actualVehicles.length);
     }
 
     private Vehicle[] getAllVehicles() throws Exception {

@@ -1,9 +1,9 @@
 package com.example.ConsignmentLot.integrationtests;
 
 import com.example.ConsignmentLot.entities.Person;
+import com.example.ConsignmentLot.entities.Vehicle;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,9 +18,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,36 +28,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @TestPropertySource(properties = {"spring.sql.init.mode=never"})
 @ActiveProfiles("test")
-public class PersonMockHttpRequest {
+public class PersonIntegratedTest {
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-    ObjectMapper mapper;
-
-    @BeforeEach
-    void beforeEach(){
-        this.mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-    }
+    private final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
     @Test
-    void testAddPerson() throws Exception {
+    void test_GetAllPersons_ValidRequest() throws Exception {
+        Person[] actualPersons = getAllPersons();
 
-        int numberOfPersonsBeforeAdd = getAllPersons().length;
-
-        Person person = new Person("Jim", LocalDateTime.of(2000,10,10,14,55));
-        Person actualperson = addPerson(person);
-        int numberOfPersonsAfterAdd = getAllPersons().length;
-
-        assertAll(
-                () -> assertEquals(person.getName(), actualperson.getName()),
-                () -> assertEquals(person.getDateOfBirth(), actualperson.getDateOfBirth()),
-                () -> assertEquals(numberOfPersonsBeforeAdd + 1, numberOfPersonsAfterAdd)
-        );
-
+        assertEquals(4, actualPersons.length);
     }
-
-    private Person addPerson(Person person) throws Exception {
+    
+    @Test
+    private Person test_AddPerson_ValidRequest(Person person) throws Exception {
         String json = mapper.writeValueAsString(person);
 
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/persons")

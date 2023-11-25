@@ -1,7 +1,9 @@
 package com.example.ConsignmentLot.controllers;
 
-import com.example.ConsignmentLot.entities.Vehicle;
-import com.example.ConsignmentLot.services.IVehicleService;
+import com.example.ConsignmentLot.entities.Car;
+import com.example.ConsignmentLot.entities.Truck;
+import com.example.ConsignmentLot.services.ICarService;
+import com.example.ConsignmentLot.services.ITruckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,19 +13,17 @@ import java.util.List;
 
 @RestController
 @SuppressWarnings("UnusedReturnValue")
-@RequestMapping("/vehicles")
-public class VehicleController {
-
-    private final IVehicleService service;
+@RequestMapping("/trucks")
+public class TruckController {
+    private final ITruckService service;
 
     @Autowired
-    public VehicleController(IVehicleService service) {
+    public TruckController(ITruckService service) {
         this.service = service;
     }
 
     @GetMapping
-    public List<Vehicle> getAllVehicles() {
-        return service.getAllVehicles();
+    public List<Truck> getAllTrucks() {
+        return service.getAllTrucks();
     }
-
 }

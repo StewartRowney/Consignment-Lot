@@ -18,36 +18,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@SuppressWarnings("UnusedReturnValue")
 @RequestMapping("/persons")
 public class PersonController {
 
-    @Autowired
-    IPersonService service;
+    private final IPersonService service;
 
     @Autowired
     public PersonController(IPersonService service) {
         this.service = service;
     }
-    @GetMapping("")
+
+    @GetMapping
     public List<Person> getAllPersons(){
         return service.getAllPersons();
     }
 
-    @Operation(summary = "Add a person", description = "Add a person")
+    @Operation(summary = "Add a person", description = "Add a person, returns a new person")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Person addPerson(@RequestBody @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Person person) {
         return service.addPerson(person);
     }
-
-//    @GetMapping("/person/{personName}/cars")
-//    public List<Car> getAllCarsByPersonName(@PathVariable String personName) {
-//        return service.getAllCarsByName(personName);
-//    }
-//
-//    @GetMapping("/person/{personName}/trucks")
-//    public List<Truck> getAllTrucksByPersonName(@PathVariable String personName) {
-//        return service.getAllTruckByName(personName);
-//    }
 
 }

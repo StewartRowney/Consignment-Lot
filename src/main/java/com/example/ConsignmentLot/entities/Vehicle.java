@@ -1,18 +1,17 @@
 package com.example.ConsignmentLot.entities;
 
+
 import com.example.ConsignmentLot.entities.enums.VehicleColour;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
-import java.awt.*;
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
 public class Vehicle {
-
     //VARIABLES
     @Id
     @GeneratedValue

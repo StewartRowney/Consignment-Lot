@@ -1,5 +1,6 @@
 package com.example.ConsignmentLot.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -18,15 +19,10 @@ public class Person {
     @GeneratedValue
     private UUID id;
     private String name;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateOfBirth;
     @OneToMany(mappedBy = "owner")
     private List<Vehicle> vehicles = new ArrayList<>();
-
-    @OneToMany(mappedBy = "owner")
-    private List<Car> cars = new ArrayList<>();
-
-    @OneToMany(mappedBy = "owner")
-    private List<Truck> trucks = new ArrayList<>();
 
     //CONSTRUCTORS
     public Person() {
@@ -34,8 +30,8 @@ public class Person {
     public Person(String name, LocalDateTime dateOfBirth) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        //this.vehicles = vehicles;
     }
+
     //GETTERS
     public UUID getId() {
         return id;
@@ -45,12 +41,6 @@ public class Person {
     }
     public LocalDateTime getDateOfBirth() {
         return dateOfBirth;
-    }
-    public List<Car> getCars() {
-        return cars;
-    }
-    public List<Truck> getTrucks() {
-        return trucks;
     }
 
     //SETTERS
