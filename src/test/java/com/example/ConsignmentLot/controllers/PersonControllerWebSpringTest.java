@@ -33,12 +33,8 @@ class PersonControllerWebSpringTest {
     @Autowired
     MockMvc mockMvc;
 
-    ObjectMapper mapper;
+    private final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
-    @BeforeEach
-    void beforeEach(){
-        this.mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-    }
 
     @Test
     void addPerson() throws Exception {
