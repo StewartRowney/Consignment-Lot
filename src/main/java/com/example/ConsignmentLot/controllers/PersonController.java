@@ -28,12 +28,13 @@ public class PersonController {
     public PersonController(IPersonService service) {
         this.service = service;
     }
-    @GetMapping("")
+
+    @GetMapping
     public List<Person> getAllPersons(){
         return service.getAllPersons();
     }
 
-    @Operation(summary = "Add a person", description = "Add a person")
+    @Operation(summary = "Add a person", description = "Add a person, returns a new person")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Person addPerson(@RequestBody @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Person person) {

@@ -18,13 +18,13 @@ import java.time.Month;
 @Profile("!test")
 public class Populator {
     LocalDateTime dob = LocalDateTime.of(2001,Month.AUGUST,15,10,10);
-    private final PersonRepository personRepository;
+    private final IPersonRepository IPersonRepository;
     private final IVehicleRepository vehicleRepository;
 
 
     @Autowired
-    public Populator(PersonRepository personRepository,IVehicleRepository vehicleRepository1) {
-        this.personRepository = personRepository;
+    public Populator(IPersonRepository IPersonRepository, IVehicleRepository vehicleRepository1) {
+        this.IPersonRepository = IPersonRepository;
         this.vehicleRepository = vehicleRepository1;
     }
 
@@ -32,8 +32,8 @@ public class Populator {
     public void populate(){
         Person p1 = new Person("Stew", LocalDateTime.of(2001,Month.AUGUST,15,10,10));
         Person p2 = new Person("Ayu", LocalDateTime.of(1996,Month.MAY,28,9,10));
-        personRepository.save(p1);
-        personRepository.save(p2);
+        IPersonRepository.save(p1);
+        IPersonRepository.save(p2);
         vehicleRepository.save(new Truck(BigDecimal.valueOf(12000), VehicleColour.BLUE, 5, true, p1));
         vehicleRepository.save(new Truck(BigDecimal.valueOf(20000), VehicleColour.BLUE, 5, false, p1));
         vehicleRepository.save(new Car(BigDecimal.valueOf(25000), VehicleColour.RED, 2, true, p1));

@@ -1,6 +1,6 @@
 package com.example.ConsignmentLot.services;
 
-import com.example.ConsignmentLot.data.PersonRepository;
+import com.example.ConsignmentLot.data.IPersonRepository;
 import com.example.ConsignmentLot.entities.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,10 +12,10 @@ import java.util.List;
 @Service
 public class PersonService implements IPersonService {
     @Autowired
-    PersonRepository repo;
+    IPersonRepository repo;
 
     @Autowired
-    public PersonService(PersonRepository repo) {
+    public PersonService(IPersonRepository repo) {
         this.repo = repo;
     }
 
