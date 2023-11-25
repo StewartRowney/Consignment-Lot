@@ -3,7 +3,6 @@ package com.example.ConsignmentLot.integrationtests;
 import com.example.ConsignmentLot.entities.Person;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,17 +25,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @TestPropertySource(properties = {"spring.sql.init.mode=never"})
 @ActiveProfiles("test")
-public class PersonMockHttpRequest {
+public class PersonIntegratedTest {
 
     @Autowired
     MockMvc mockMvc;
 
-    ObjectMapper mapper;
-
-    @BeforeEach
-    void beforeEach(){
-        this.mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-    }
+    private final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
     @Test
     private Person addPerson(Person person) throws Exception {
