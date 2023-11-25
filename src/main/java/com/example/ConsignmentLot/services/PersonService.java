@@ -26,7 +26,7 @@ public class PersonService implements IPersonService {
     @Override
     public Person addPerson(Person person) {
         if (person.getId() != null) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Cannot set Person id, set value to null");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot set Person id, set value to null");
         }
         return repo.save(person);
     }

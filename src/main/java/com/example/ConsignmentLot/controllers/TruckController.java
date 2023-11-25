@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@SuppressWarnings("UnusedReturnValue")
 @RequestMapping("/trucks")
 public class TruckController {
     private final ITruckService service;

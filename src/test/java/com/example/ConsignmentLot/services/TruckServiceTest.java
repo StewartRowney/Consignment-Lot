@@ -7,23 +7,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class VehicleServiceTest {
+class TruckServiceTest {
 
     @MockBean
     private IVehicleRepository mockRepository;
 
     @Autowired
-    private VehicleService uut;
+    private TruckService uut;
 
     @Test
-    void test_GetAllVehicles_ValidRequest() {
-        uut.getAllVehicles();
-        verify(mockRepository, times(1)).findAll();
+    void test_GetAllTrucks_ValidRequest() {
+        uut.getAllTrucks();
+        verify(mockRepository, times(1)).findAllTrucks();
     }
 }

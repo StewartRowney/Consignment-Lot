@@ -28,16 +28,26 @@ import static org.mockito.Mockito.verify;
 class PersonControllerWebSpringTest {
 
     @MockBean
-    IPersonService mockService;
+    private IPersonService mockService;
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     private final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
+    @Test
+    void test_GetAllPersons_ValidRequest() throws Exception {
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/persons")
+                .accept(MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        verify(mockService, times(1)).getAllPersons();
+    }
 
     @Test
-    void addPerson() throws Exception {
+    void test_AddPerson_ValidRequest() throws Exception {
         Person person = new Person("Jim", LocalDateTime.of(2000,10,10,14,55));
         String json = mapper.writeValueAsString(person);
 

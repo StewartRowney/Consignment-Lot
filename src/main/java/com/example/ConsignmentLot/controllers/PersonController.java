@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@SuppressWarnings("UnusedReturnValue")
 @RequestMapping("/persons")
 public class PersonController {
 

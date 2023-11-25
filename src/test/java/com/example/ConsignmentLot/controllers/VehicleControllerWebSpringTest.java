@@ -10,22 +10,21 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @WebMvcTest(VehicleController.class)
 @ActiveProfiles("test")
-class VehicleControllerFullSpringTest {
+class VehicleControllerWebSpringTest {
 
     @MockBean
     private IVehicleService mockService;
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Test
-    void test_GetAllVehicles() throws Exception {
+    void test_GetAllVehicles_ValidRequest() throws Exception {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/vehicles");
         mockMvc.perform(requestBuilder);
         verify(mockService, times(1)).getAllVehicles();

@@ -1,6 +1,6 @@
 package com.example.ConsignmentLot.integrationtests;
 
-import com.example.ConsignmentLot.entities.Vehicle;
+import com.example.ConsignmentLot.entities.Truck;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @TestPropertySource(properties = {"spring.sql.init.mode=never"})
 @ActiveProfiles("test")
-class VehicleIntegratedTest {
+class TruckIntegratedTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -34,22 +34,21 @@ class VehicleIntegratedTest {
     private final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
     @Test
-    void test_GetAllVehicles_ValidRequest() throws Exception {
-        Vehicle[] actualVehicles = getAllVehicles();
+    void test_GetAllTrucks_ValidRequest() throws Exception {
+        Truck[] actualTrucks = getAllTrucks();
 
-        assertEquals(3, actualVehicles.length);
+        assertEquals(1, actualTrucks.length);
     }
 
-    private Vehicle[] getAllVehicles() throws Exception {
+    private Truck[] getAllTrucks() throws Exception {
         MvcResult result =
-                (this.mockMvc.perform(MockMvcRequestBuilders.get("/vehicles")))
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/trucks")))
                         .andExpect(status().isOk())
                         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                         .andReturn();
 
         String contentAsJson = result.getResponse().getContentAsString();
-        return mapper.readValue(contentAsJson, Vehicle[].class);
+        return mapper.readValue(contentAsJson, Truck[].class);
     }
 
 }
-

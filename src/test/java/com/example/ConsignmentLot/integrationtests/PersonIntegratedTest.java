@@ -1,6 +1,7 @@
 package com.example.ConsignmentLot.integrationtests;
 
 import com.example.ConsignmentLot.entities.Person;
+import com.example.ConsignmentLot.entities.Vehicle;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -28,12 +31,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PersonIntegratedTest {
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     private final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
     @Test
-    private Person addPerson(Person person) throws Exception {
+    void test_GetAllPersons_ValidRequest() throws Exception {
+        Person[] actualPersons = getAllPersons();
+
+        assertEquals(4, actualPersons.length);
+    }
+    
+    @Test
+    private Person test_AddPerson_ValidRequest(Person person) throws Exception {
         String json = mapper.writeValueAsString(person);
 
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/persons")
@@ -48,5 +58,16 @@ public class PersonIntegratedTest {
 
         String contentAsJson = result.getResponse().getContentAsString();
         return mapper.readValue(contentAsJson, Person.class);
+    }
+
+    private Person[] getAllPersons() throws Exception {
+        MvcResult result =
+                (this.mockMvc.perform(MockMvcRequestBuilders.get("/persons")))
+                        .andExpect(status().isOk())
+                        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                        .andReturn();
+
+        String contentAsJson = result.getResponse().getContentAsString();
+        return mapper.readValue(contentAsJson, Person[].class);
     }
 }

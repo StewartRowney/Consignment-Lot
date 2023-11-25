@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@SuppressWarnings("UnusedReturnValue")
 @RequestMapping("/cars")
 public class CarController {
     private final ICarService service;
