@@ -1,6 +1,8 @@
 package com.example.ConsignmentLot.services;
 
+import com.example.ConsignmentLot.comparators.VehicleComparator;
 import com.example.ConsignmentLot.data.IVehicleRepository;
+import com.example.ConsignmentLot.entities.Car;
 import com.example.ConsignmentLot.entities.Truck;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ public class TruckService implements ITruckService{
 
     @Override
     public List<Truck> getAllTrucks() {
-        return vehicleRepository.findAllTrucks();
+        List<Truck> trucks = vehicleRepository.findAllTrucks();
+        trucks.sort(new VehicleComparator());
+        return trucks;
     }
 }
